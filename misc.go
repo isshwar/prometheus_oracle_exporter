@@ -63,7 +63,7 @@ func cleanIp(s string) string {
 func loadConfig() bool {
 	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		promlog.Fatalf("error: %v", err)
 	}
 	pwd = path
 	content, err := ioutil.ReadFile(*configFile)
