@@ -11,7 +11,7 @@ import (
 	_ "github.com/mattn/go-oci8"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/prometheus/common/tree/v0.24.0/log"
+	"github.com/prometheus/common/v0.24.0/log"
 )
 
 // Metric name parts.
