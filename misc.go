@@ -9,7 +9,7 @@ import (
 	"time"
 
 	_ "github.com/mattn/go-oci8"
-	"github.com/prometheus/common/promlog"
+	"github.com/prometheus/common/tree/v0.24.0/log"
 	"gopkg.in/yaml.v2"
 )
 
@@ -63,7 +63,7 @@ func cleanIp(s string) string {
 func loadConfig() bool {
 	path, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
-		promlog.Fatalf("error: %v", err)
+		log.Fatalf("error: %v", err)
 	}
 	pwd = path
 	content, err := ioutil.ReadFile(*configFile)
