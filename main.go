@@ -910,7 +910,7 @@ func (e *Exporter) Connect() {
 				} else {
 					config.Cfgs[i].db.Close()
 					e.up.WithLabelValues(conf.Database, conf.Instance).Set(0)
-					log.Errorln("Error connecting to database:", err)
+					promlog.Errorln("Error connecting to database:", err)
 					//log.Infoln("Connect OK, Inital query failed: ", conf.Connection)
 				}
 			}
@@ -1085,9 +1085,9 @@ func (e *Exporter) Handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	flag.Parse()
-	log.Infoln("Starting Prometheus Oracle exporter " + Version)
+	promlog.Infoln("Starting Prometheus Oracle exporter " + Version)
 	if loadConfig() {
-		log.Infoln("Config loaded: ", *configFile)
+		promlog.Infoln("Config loaded: ", *configFile)
 		exporter := NewExporter()
 		prometheus.MustRegister(exporter)
 
@@ -1095,7 +1095,7 @@ func main() {
 
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { w.Write(landingPage) })
 
-		log.Infoln("Listening on", *listenAddress)
-		log.Fatal(http.ListenAndServe(*listenAddress, nil))
+		promlog.Infoln("Listening on", *listenAddress)
+		promlog.Fatal(http.ListenAndServe(*listenAddress, nil))
 	}
 }
