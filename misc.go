@@ -9,7 +9,7 @@ import (
 	"time"
 
 	_ "github.com/mattn/go-oci8"
-	"github.com/prometheus/common/tree/v0.24.0/log"
+	"github.com/prometheus/common/v0.24.0/log"
 	"gopkg.in/yaml.v2"
 )
 
