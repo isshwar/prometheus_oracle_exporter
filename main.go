@@ -11,7 +11,7 @@ import (
 	_ "github.com/mattn/go-oci8"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/prometheus/common/promlog"
+	"github.com/prometheus/common/tree/v0.24.0/log"
 )
 
 // Metric name parts.
@@ -910,7 +910,7 @@ func (e *Exporter) Connect() {
 				} else {
 					config.Cfgs[i].db.Close()
 					e.up.WithLabelValues(conf.Database, conf.Instance).Set(0)
-					promlog.Errorln("Error connecting to database:", err)
+					log.Errorln("Error connecting to database:", err)
 					//log.Infoln("Connect OK, Inital query failed: ", conf.Connection)
 				}
 			}
@@ -1085,9 +1085,9 @@ func (e *Exporter) Handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	flag.Parse()
-	promlog.Infoln("Starting Prometheus Oracle exporter " + Version)
+	log.Infoln("Starting Prometheus Oracle exporter " + Version)
 	if loadConfig() {
-		promlog.Infoln("Config loaded: ", *configFile)
+		log.Infoln("Config loaded: ", *configFile)
 		exporter := NewExporter()
 		prometheus.MustRegister(exporter)
 
@@ -1095,7 +1095,7 @@ func main() {
 
 		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { w.Write(landingPage) })
 
-		promlog.Infoln("Listening on", *listenAddress)
-		promlog.Fatal(http.ListenAndServe(*listenAddress, nil))
+		log.Infoln("Listening on", *listenAddress)
+		log.Fatal(http.ListenAndServe(*listenAddress, nil))
 	}
 }
