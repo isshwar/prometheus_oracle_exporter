@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/prometheus/common/promlog"
+	"github.com/prometheus/common/tree/v0.24.0/log"
 )
 
 type Client struct {
@@ -124,7 +124,7 @@ func (e *Exporter) ScrapeAlertlog() {
 			info, err := os.Stat(config.Cfgs[conf].Alertlog[0].File)
 			file, err := os.Open(config.Cfgs[conf].Alertlog[0].File)
 			if err != nil {
-				promlog.Infoln(err)
+				log.Infoln(err)
 			} else {
 				scanner := bufio.NewScanner(file)
 				for scanner.Scan() {
