@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/prometheus/common/v0.24.0/log"
+	"github.com/prometheus/common@v0.24.0/log"
 )
 
 type Client struct {
