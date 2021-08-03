@@ -124,7 +124,7 @@ func (e *Exporter) ScrapeAlertlog() {
 			info, err := os.Stat(config.Cfgs[conf].Alertlog[0].File)
 			file, err := os.Open(config.Cfgs[conf].Alertlog[0].File)
 			if err != nil {
-				log.Infoln(err)
+				promlog.Infoln(err)
 			} else {
 				scanner := bufio.NewScanner(file)
 				for scanner.Scan() {
